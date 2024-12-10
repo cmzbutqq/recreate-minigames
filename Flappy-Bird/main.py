@@ -19,7 +19,7 @@ class App:
             self.event_handle()
             self.update()
             self.draw()
-            self.clock.tick(FPS)
+            self.dt = self.clock.tick(FPS) / 1000
 
     def event_handle(self):
         for event in pygame.event.get():
@@ -35,9 +35,8 @@ class App:
     def update(self):
         if not self.start:
             return
-        self.dt = self.clock.tick(FPS) / 1000
         pygame.display.set_caption(
-            f"Flappy Bird | PipeCount: {len(self.pipes.pipes)} | score: {self.score} |  birdpos: {self.bird.pos.y} | birdvel: {self.bird.vel.y}"
+            f"Flappy Bird | PipeCount: {len(self.pipes.pipes)} | score: {self.score} |  birdpos: {self.bird.pos.y} | dt: {self.dt}"
         )
         self.bird.update(self.dt)
         self.pipes.update(self.dt)
